@@ -7,28 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-<form method="post">
-        <input type="submit" name="button1"
-                class="button" value="Button1" />
-</form>
+<h1>test</h1>
 
 
 <?php
-$dir = 'photo';
+$dir = $_POST['folderName'];
 $files = scandir($dir);
-
-if(isset($_POST['button1'])) {
     foreach ($files as $value) {
         $extension = pathinfo($value, PATHINFO_EXTENSION); 
     
         $randNum = rand(100000,999999);
         $dot = '.';
         $newName = $randNum.$dot.$extension;
-        chdir('photo');
+        chdir($dir);
         rename($value, $newName);
     };
-    echo('succes!');
-}
+    header("location: succes.php");
+    exit(); 
+
 
 ?>
 </body>
